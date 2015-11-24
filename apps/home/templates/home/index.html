@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Login and Registration</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'home/style.css' %}">
+</head>
+<body>
+	<div id="wrapper">
+		<p>Welcome!</p>
+		<form id="register" action="{% url 'register' %}" method="POST">
+			{% csrf_token %}
+			<label>Name: <input type="text" name="name"></label>
+			<label>Username: <input type="text" name="username"></label>
+			<label>Password: <input type="password" name="password"></label>
+			<label>Confirm: <input type="password" name="confirm"></label>
+			<label>Admin Level: 
+				<select id="admin" name="admin">
+					<option value="user">User</option>
+					<option value="host">Host</option>
+				</select>
+			</label>
+			<label><button>Register</button></label>
+		</form>
+		<form id="login" action="{% url 'login' %}" method="POST">
+			{% csrf_token %}
+			<label>Username: <input type="text" name="username"></label>
+			<label>Password: <input type="password" name="password"></label>
+			<label><button>Login</button></label>
+		</form>
+	</div>
+</body>
+</html>
