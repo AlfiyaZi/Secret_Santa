@@ -5,6 +5,20 @@
 	<title>Add an Item</title>
 	{% load staticfiles %}
 	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+	<style>
+		body{
+			background: white url("static/home/img/christmas.jpg") no-repeat right bottom;
+	}
+		h1,h3,p{
+			color: white;
+		}
+		table td,thead{
+			color: white;
+		}
+		a{
+			color: red;
+		}
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -18,7 +32,7 @@
 			{% endif %}
 
 			<table class="table table-bordered">
-			  	<caption>Your Results!</caption>
+			  	<caption><h3>Your Results!</h3></caption>
 			  	<thead>
 			   	<tr>
 			      	<th>Item</th>
@@ -31,7 +45,7 @@
 			    <tr>
 			      <td>{{i.title}}</td>
 			      <td><a href='https://www.amazon.com/dp/{{i.asin}}'>Go Here!</a></td>
-			      <td><form action='' method='post'><button>Add</button></form></td>
+			      <td><form action='' method='post'><button class='btn btn-danger'>Add</button></form></td>
 			    </tr>
 			  </tbody>
 			{% endfor %}
@@ -43,6 +57,7 @@
 				<input class='btn btn-danger' type='submit'value ='Search!'>
 			</form>
 		</div>
+
 	</div>
 </body>
 </html>

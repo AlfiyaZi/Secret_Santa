@@ -84,8 +84,5 @@ def add(request):
 		'items': query,
 	}
 	
-	return render(request, 'home/add.html',image)
+	return render(request, 'home/add.html',item)
 
-def search(request):
-	request.session['keyword'] = request.POST['search']
-	return redirect ('add')

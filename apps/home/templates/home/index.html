@@ -4,31 +4,87 @@
 	<meta charset="utf-8">
 	<title>Login and Registration</title>
 	{% load staticfiles %}
-	<link rel="stylesheet" href="{% static 'home/style.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+	<style>
+		body{
+			background: white url("static/home/img/christmas.jpg") no-repeat right bottom;
+	}
+		#container h1,h3, label{
+			color: white;
+		}
+		h1{
+			color: white;
+		}
+
+	</style>
 </head>
 <body>
-	<div id="wrapper">
-		<p>Welcome!</p>
-		<form id="register" action="{% url 'register' %}" method="POST">
-			{% csrf_token %}
-			<label>Name: <input type="text" name="name"></label>
-			<label>Username: <input type="text" name="username"></label>
-			<label>Password: <input type="password" name="password"></label>
-			<label>Confirm: <input type="password" name="confirm"></label>
-			<label>Admin Level: 
-				<select id="admin" name="admin">
-					<option value="user">User</option>
-					<option value="host">Host</option>
-				</select>
-			</label>
-			<label><button>Register</button></label>
-		</form>
-		<form id="login" action="{% url 'login' %}" method="POST">
-			{% csrf_token %}
-			<label>Username: <input type="text" name="username"></label>
-			<label>Password: <input type="password" name="password"></label>
-			<label><button>Login</button></label>
-		</form>
+	<div class="container center_div">
+		<div class='text-center'>
+		<h1>Welcome!</h1>
+		</div>
+		
+		<div class='text-center'>
+			<h3>Register</h3>
+		</div>
+			<div class='text-center'>
+				<form class="form-vertical" action="{% url 'register' %}" method="POST">
+					
+					<div class="control-group">
+						{% csrf_token %}
+						<label class="control-label">Name: 
+							<div class='controls'>
+								<input type="text" name="name" placeholder='Name'></label>
+							</div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label">Username: 
+							<div class='controls'>
+								<input type="text" name="username" placeholder='Username'></label>
+							</div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label">Password: 
+							<div class='controls'>
+								<input type="password" name="password" placeholder='Password'></label>
+							</div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label">Confirm:
+							<div class='controls'>
+							 <input type="password" name="confirm" placeholder='Confirm Password'></label>
+							</div>
+					</div>
+
+					<div class="control-group">
+						<label class="control-label">Admin Level:
+						</label>
+							<div class='controls'>
+								<select id="admin" name="admin">
+									<option value="user">User</option>
+									<option value="host">Host</option>
+								</select>
+							</div>
+					</div>
+
+						<label><button>Register</button></label>
+					
+				</form>
+			
+			</div>
+		
+		<div class='text-center'>
+			<h1>Login</h1>
+			<form class="form-inline" action="{% url 'login' %}" method="POST">
+				{% csrf_token %}
+				<input type="text" name="username" placeholder='Username'></label>
+				<input type="password" name="password" placeholder='Password'></label>
+				<label><button>Login</button></label>
+			</form>
+		</div>
 	</div>
 </body>
 </html>

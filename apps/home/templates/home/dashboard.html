@@ -4,15 +4,21 @@
 	<meta charset="utf-8">
 	<title>Dashboard</title>
 	{% load staticfiles %}
-	<link rel="stylesheet" href="{% static 'home/style.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+	<style>
+		body{
+			background: white url("static/home/img/christmas.jpg") no-repeat right bottom;
+	}
+		
+	</style>
 </head>
 <body>
-	<div id="wrapper">
-		<div id="topNav">
-			<p>Welcome User</p>
+	<div class="container">
+		<div class="text-center">
+			<h1>Welcome User</h1>
 			<a href="{% url 'back' %}">Logout</a>
 		</div>
-		<p>My Wish List</p>
+		<h3>My Wish List</h3>
 		<table id="myWishList">
 			<tr>
 				<th>Item</th>
