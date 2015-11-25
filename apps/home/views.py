@@ -60,5 +60,9 @@ def dashboard(request):
 	return render(request, 'home/dashboard.html')
 
 def back(request):
-	
+
 	return redirect('/')
+
+def add(request):
+
+	return render(request, 'home/add.html')
