@@ -4,17 +4,49 @@
 	<meta charset="utf-8">
 	<title>Add an Item</title>
 	{% load staticfiles %}
-	<link rel="stylesheet" href="{% static 'home/style.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
 </head>
 <body>
-	<div id="wrapper">
-		<div id="topNav">
-			<p>Welcome User</p>
+	<div class="container">
+		<div class="text-center">
+			<h1>Welcome User</h1>
 			<a href="{% url 'back' %}">Logout</a>
+		</div> <!-- End div -->
+		<div class="text-center">
+			{% if items == "" %}
+				<h1>NO MATCH!</h1>
+			{% endif %}
+
+			{% for i in lookup %}
+				<p>{{i.images}}</p>
+			{% endfor %}
+			<table class="table table-bordered">
+			  	<caption>Your Results!</caption>
+			  	<thead>
+			   	<tr>
+			      	<th>Item</th>
+			      	<th>Link</th>
+			      	<th>Add</th>
+			    </tr>
+			  </thead>
+			{% for i in items %}
+			  <tbody>
+			    <tr>
+			      <td>{{i.title}}</td>
+			      <td><a href='https://www.amazon.com/dp/{{i.asin}}'>Go Here!</a></td>
+			      <td><form action='' method='post'><button>Add</button></form></td>
+			    </tr>
+			  </tbody>
+			{% endfor %}
+			</table>
+			
+			
+			<form action='/search' method='post'>
+					{% csrf_token %}
+				<input type='text' name='search' placeholder="Enter Item Here!">
+				<input type='submit'value ='Search!'>
+			</form>
 		</div>
-		
-		<p>API STUFF GOES HERE</p>
-		
 	</div>
 </body>
 </html>

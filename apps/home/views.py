@@ -1,7 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from apps.home.models import User, Item
+from amazon.api import AmazonAPI
 
+
+
+
+amazon = AmazonAPI('AKIAIHLZRKVT4Z7YA4DA', 'hh9fH8KhGG3P9EhMP4gWmeqsLnQSkejQMNiHK5oF', 'dojo0d-20')
 def index(request):
 
 	return render(request, 'home/index.html')
@@ -64,5 +69,29 @@ def back(request):
 	return redirect('/')
 
 def add(request):
+	try:
+		search = request.session['keyword']
+	except:
+		request.session['keyword'] = ''
 
-	return render(request, 'home/add.html')
+
+	
+	
+	try:
+		query = amazon.search_n(5, Keywords=search, SearchIndex='All')
+
+	except:
+		query = ""
+	# lookup = amazon.lookup(ItemId ='B00251VAGK')
+	# print lookup['images']
+	item = {
+		'items': query,
+	}
+	
+	return render(request, 'home/add.html', item )
+
+
+
+def search(request):
+	request.session['keyword'] = request.POST['search']
+	return redirect ('add')

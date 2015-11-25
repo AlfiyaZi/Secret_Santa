@@ -8,4 +8,5 @@ urlpatterns = [
 	url(r'dashboard/', views.dashboard, name='dashboard'),
 	url(r'back/', views.back, name='back'),
 	url(r'add', views.add, name='add'),
+	url(r'search', views.search, name='search'),
 ]
