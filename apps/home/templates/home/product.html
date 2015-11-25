@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Product Info</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'home/style.css' %}">
+</head>
+<body>
+	<div id="wrapper">
+		<div id="topNav">
+			<p>Welcome User</p>
+			<a href="{% url 'back' %}">Logout</a>
+		</div>
+
+		<p>Product Name</p>
+		<p>Product Price</p>
+		<p>Product Description</p>
+		<a href="#">Product Link</a>
+		
+	</div>
+</body>
+</html>

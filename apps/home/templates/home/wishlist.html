@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>User's Wishlist</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'home/style.css' %}">
+</head>
+<body>
+	<div id="wrapper">
+		<div id="topNav">
+			<p>Welcome User</p>
+			<a href="{% url 'back' %}">Logout</a>
+		</div>
+
+		<p>User's Wish List</p>
+		<table id="otherWishList">
+			<tr>
+				<th>Item</th>
+				<th>Price</th>
+				<th>Friend</th>
+			</tr>
+			<tr>
+				<td><a href="#">Example Item</a></td>
+				<td>Example Price</td>
+				<td><a href="#">Example Friend</a></td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#wrapper {
+	width: 600px;
+	outline: 1px solid black;
+}
+
+/*REGISTRATION/LOGIN CSS*/
+
+#register, #login {
+	width: 250px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#admin {
+	width: 125px;
+}
+
+label {
+	display: block;
+	text-align: right;
+}
+
+button {
+	margin-top: 10px;
+}
+
+/*DASHBOARD CSS*/
+
+#topNav {
+	width: 600px;
+	display: inline-block;
+	outline: 1px solid black;
+}
+
+	#topNav a, #topNav p {
+		display: inline;
+	}
+
+	#topNav a {
+		float: right;
+	}
+
+table, th, td {
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+
+table {
+	margin-left: 10px;
+}
+
+td {
+	padding: 0px 25px;
+}
+
+.error {
+	text-align: right;
+}
+
