@@ -74,23 +74,17 @@ def add(request):
 	except:
 		request.session['keyword'] = ''
 
-
-	
-	
-	try:
+	try: # searches amazon for keyword and returns top 5 items 
 		query = amazon.search_n(5, Keywords=search, SearchIndex='All')
 
 	except:
 		query = ""
-	# lookup = amazon.lookup(ItemId ='B00251VAGK')
-	# print lookup['images']
+
 	item = {
 		'items': query,
 	}
 	
-	return render(request, 'home/add.html', item )
-
-
+	return render(request, 'home/add.html',image)
 
 def search(request):
 	request.session['keyword'] = request.POST['search']

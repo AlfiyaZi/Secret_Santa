@@ -17,9 +17,6 @@
 				<h1>NO MATCH!</h1>
 			{% endif %}
 
-			{% for i in lookup %}
-				<p>{{i.images}}</p>
-			{% endfor %}
 			<table class="table table-bordered">
 			  	<caption>Your Results!</caption>
 			  	<thead>
@@ -40,11 +37,10 @@
 			{% endfor %}
 			</table>
 			
-			
 			<form action='/search' method='post'>
 					{% csrf_token %}
 				<input type='text' name='search' placeholder="Enter Item Here!">
-				<input type='submit'value ='Search!'>
+				<input class='btn btn-danger' type='submit'value ='Search!'>
 			</form>
 		</div>
 	</div>
