@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Dashboard</title>
+	<title>User's Wishlist</title>
 	{% load staticfiles %}
 	<link rel="stylesheet" href="{% static 'home/style.css' %}">
 </head>
@@ -12,17 +12,6 @@
 			<p>Welcome User</p>
 			<a href="{% url 'back' %}">Logout</a>
 		</div>
-		<p>My Wish List</p>
-		<table id="myWishList">
-			<tr>
-				<th>Item</th>
-				<th>Price</th>
-			</tr>
-			<tr>
-				<td><a href="#">Example Item</a></td>
-				<td>Example Price</td>
-			</tr>
-		</table>
 
 		<p>User's Wish List</p>
 		<table id="otherWishList">

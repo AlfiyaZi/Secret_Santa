@@ -43,19 +43,22 @@ def login(request):
 	password = request.POST['password']
 	errors = 0
 
-
-	if not User.objects.all().filter(username=username):
+	if not User.objects.get(username=username):
 		messages.add_message(request, messages.INFO, 'Username is invalid')
 		errors += 1
 		return redirect('/')
 	else:
-		if password != User.objects.all().filter(username=username).password:
+		if password != User.objects.get(username=username).password:
 			messages.add_message(request, messages.INFO, 'Password is invalid')
 			errors += 1
 			return redirect('/')
 		else:
-			return redirect('/dashboard')
+			return redirect('dashboard')
 
 def dashboard(request):
 
 	return render(request, 'home/dashboard.html')
+
+def back(request):
+	
+	return redirect('/')
