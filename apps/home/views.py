@@ -1,24 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from apps.home.models import User, Item
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 from amazon.api import AmazonAPI
-=======
 import bcrypt
->>>>>>> master
-=======
-import bcrypt
->>>>>>> master
-=======
-import bcrypt
->>>>>>> master
-
-
 
 
 amazon = AmazonAPI('AKIAIHLZRKVT4Z7YA4DA', 'hh9fH8KhGG3P9EhMP4gWmeqsLnQSkejQMNiHK5oF', 'dojo0d-20')
+
 def index(request):
 
 	return render(request, 'home/index.html')
@@ -49,9 +37,9 @@ def register(request):
 		errors += 1
 
 	if errors == 0:
-		password = password.encode("utf-8")
-		pw_hash = bcrypt.hashpw(password, bcrypt.gensalt())
-		User.objects.create(name=name, username=username, password=pw_hash, admin=admin)
+		# password = password.encode("utf-8")
+		# pw_hash = bcrypt.hashpw(password, bcrypt.gensalt())
+		User.objects.create(name=name, username=username, password=password, admin=admin)
 		messages.add_message(request, messages.INFO, 'Successfully Registered!', extra_tags="registration")
 
 	return redirect('/')
@@ -60,16 +48,15 @@ def login(request):
 
 	username = request.POST['username']
 	password = request.POST['password']
-	errors = 0
 
 	if not User.objects.all().filter(username=username):
 		messages.add_message(request, messages.INFO, 'Username is invalid', extra_tags="login")
-		errors += 1
 		return redirect('/')
 	else:
-		if bcrypt.hashpw(password, pw_hash) == pw_hash:
+		# pw_hash = User.objects.all().filter(username=username)[:1][0].password
+		# if bcrypt.hashpw(password, pw_hash) == pw_hash:
+		if User.objects.all().filter(username=username)[0].password != password:
 			messages.add_message(request, messages.INFO, 'Password is invalid', extra_tags="login")
-			errors += 1
 			return redirect('/')
 		else:
 			return redirect('dashboard')
@@ -87,9 +74,6 @@ def add(request):
 		search = request.session['keyword']
 	except:
 		request.session['keyword'] = ''
-
-
-	
 	
 	try:
 		query = amazon.search_n(5, Keywords=search, SearchIndex='All')
