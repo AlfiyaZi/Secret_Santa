@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from apps.home.models import User
+from apps.home.models import User, Item
 
 def index(request):
 
