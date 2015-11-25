@@ -7,6 +7,8 @@ urlpatterns = [
 	url(r'login/', views.login, name='login'),
 	url(r'dashboard/', views.dashboard, name='dashboard'),
 	url(r'back/', views.back, name='back'),
-	url(r'add', views.add, name='add'),
+	url(r'logout/', views.logout, name='logout'),
+	url(r'add/', views.add, name='add'),
 	url(r'search', views.search, name='search'),
+	url(r'create/', views.create, name='create'),
 ]

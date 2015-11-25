@@ -10,7 +10,7 @@
 	<div class="container">
 		<div class="text-center">
 			<h1>Welcome User</h1>
-			<a href="{% url 'back' %}">Logout</a>
+			<a href="{% url 'back' %}">Back</a>
 		</div> <!-- End div -->
 		<div class="text-center">
 			{% if items == "" %}
@@ -34,7 +34,13 @@
 			    <tr>
 			      <td>{{i.title}}</td>
 			      <td><a href='https://www.amazon.com/dp/{{i.asin}}'>Go Here!</a></td>
-			      <td><form action='' method='post'><button>Add</button></form></td>
+			      <td>
+			      	<form action="{% url 'create' %}" method='post'>
+			      		{% csrf_token %}
+			      		<input type="hidden" name="item" value="{{i.title}}">
+			      		<button>Add</button>
+			      	</form>
+			      </td>
 			    </tr>
 			  </tbody>
 			{% endfor %}

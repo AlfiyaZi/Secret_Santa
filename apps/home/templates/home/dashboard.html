@@ -9,19 +9,19 @@
 <body>
 	<div id="wrapper">
 		<div id="topNav">
-			<p>Welcome User</p>
-			<a href="{% url 'back' %}">Logout</a>
+			<p>Welcome {{username}}!</p>
+			<a href="{% url 'logout' %}">Logout</a>
 		</div>
 		<p>My Wish List</p>
 		<table id="myWishList">
 			<tr>
 				<th>Item</th>
-				<th>Price</th>
 			</tr>
-			<tr>
-				<td><a href="#">Example Item</a></td>
-				<td>Example Price</td>
-			</tr>
+			{% for item in items %}
+				<tr>
+					<td><a href="#">{{item.item.item}}</a></td>
+				</tr>
+			{% endfor %}
 		</table>
 		<a href="{% url 'add' %}">Add an item</a>
 
@@ -29,12 +29,10 @@
 		<table id="otherWishList">
 			<tr>
 				<th>Item</th>
-				<th>Price</th>
 				<th>Friend</th>
 			</tr>
 			<tr>
 				<td><a href="#">Example Item</a></td>
-				<td>Example Price</td>
 				<td><a href="#">Example Friend</a></td>
 			</tr>
 		</table>

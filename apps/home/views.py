@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from apps.home.models import User, Item
+from apps.home.models import User, Item, Wishlist
 from amazon.api import AmazonAPI
 import bcrypt
 
@@ -59,27 +59,37 @@ def login(request):
 			messages.add_message(request, messages.INFO, 'Password is invalid', extra_tags="login")
 			return redirect('/')
 		else:
+			request.session['user_id'] = User.objects.all().filter(username=username)[0].id
 			return redirect('dashboard')
 
 def dashboard(request):
 
-	return render(request, 'home/dashboard.html')
+	context = {
+		'username': User.objects.get(id=request.session['user_id']).username,
+		'items': Wishlist.objects.all().filter(user=request.session['user_id']),
+	}
+
+
+	return render(request, 'home/dashboard.html', context)
 
 def back(request):
+
+	return redirect('dashboard')
+
+def logout(request):
 
 	return redirect('/')
 
 def add(request):
+
 	try:
 		search = request.session['keyword']
-	except:
-		request.session['keyword'] = ''
-	
-	try:
 		query = amazon.search_n(5, Keywords=search, SearchIndex='All')
 
 	except:
+		request.session['keyword'] = ''
 		query = ""
+
 	# lookup = amazon.lookup(ItemId ='B00251VAGK')
 	# print lookup['images']
 	item = {
@@ -88,8 +98,20 @@ def add(request):
 	
 	return render(request, 'home/add.html', item )
 
-
-
 def search(request):
+
 	request.session['keyword'] = request.POST['search']
 	return redirect ('add')
+
+def create(request):
+
+	user = User.objects.all().filter(id=request.session['user_id'])[:1]
+	item = request.POST['item']
+	Item.objects.create(item=item, user=user[0])
+
+	item_id = Item.objects.all().filter(item=item)[0].id
+	item = Item.objects.all().filter(id=item_id)
+
+	Wishlist.objects.create(item=item[0], user=user[0])
+
+	return redirect('dashboard')
