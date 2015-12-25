@@ -66,9 +66,11 @@ def dashboard(request):
 
 	context = {
 		'username': User.objects.get(id=request.session['user_id']).username,
-		'items': Wishlist.objects.all().filter(user=request.session['user_id']),
+		'my_items': Wishlist.objects.all().filter(user=request.session['user_id']),
+		'other_items': Wishlist.objects.all().exclude(user=request.session['user_id'])
 	}
 
+	print context;
 
 	return render(request, 'home/dashboard.html', context)
 

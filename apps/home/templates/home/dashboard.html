@@ -11,8 +11,6 @@
 		$(document).ready(function() {
 	    // put all your jQuery goodness in here.
 	    	console.log('Ready');
-	    	
-
 		});
 
 		// Load the SDK asynchronously
@@ -58,7 +56,7 @@
         });
     }
 </script>
-	></script>
+	</script>
 
 </head>
 <body>
@@ -72,10 +70,12 @@
 		<table id="myWishList">
 			<tr>
 				<th>Item</th>
+				<th>Action</th>
 			</tr>
-			{% for item in items %}
+			{% for item in my_items %}
 				<tr>
 					<td><a href="#">{{item.item.item}}</a></td>
+					<td>Remove</td>
 				</tr>
 			{% endfor %}
 		</table>
@@ -87,10 +87,12 @@
 				<th>Item</th>
 				<th>Friend</th>
 			</tr>
+			{% for item in other_items %}
 			<tr>
-				<td><a href="#">Example Item</a></td>
-				<td><a href="#">Example Friend</a></td>
+				<td><a href="#">{{item.item.item}}</a></td>
+				<td>{{item.item.user.name}}</td>
 			</tr>
+			{% endfor %}
 		</table>
 	</div>
 </body>
