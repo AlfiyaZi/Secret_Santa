@@ -5,7 +5,7 @@ from amazon.api import AmazonAPI
 import bcrypt
 
 
-amazon = AmazonAPI('AKIAIHLZRKVT4Z7YA4DA', 'hh9fH8KhGG3P9EhMP4gWmeqsLnQSkejQMNiHK5oF', 'dojo0d-20')
+amazon = AmazonAPI('AKIAIHLZRKVT4Z7YA4DA', 'hh9fH8KhGG3P9EhMP4gWmeqsLnQSkejQMNiHK5oF','dojo0d-20')
 
 def index(request):
 
@@ -95,9 +95,11 @@ def add(request):
 	item = {
 		'items': query,
 	}
-	
 
-	return render(request, 'home/add.html', item )
+	print query
+	print amazon
+
+	return render(request, 'home/add.html', item)
 
 def search(request):
 

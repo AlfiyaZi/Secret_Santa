@@ -5,6 +5,15 @@
 	<title>Add an Item</title>
 	{% load staticfiles %}
 	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+	<script type="text/javascript">
+
+		if (window.XMLHttpRequest) {
+			xmlhttp = new XMLHttpRequest();
+		} else {
+			xmlhttp = new ActiveXObject
+		}
+
+	</script>
 </head>
 <body>
 	<div class="container">
@@ -25,19 +34,21 @@
 			  	<thead>
 			   	<tr>
 			      	<th>Item</th>
+			      	<th>Image</th>
 			      	<th>Link</th>
 			      	<th>Add</th>
 			    </tr>
 			  </thead>
-			{% for i in items %}
+			{% for item in items %}
 			  <tbody>
 			    <tr>
-			      <td>{{i.title}}</td>
-			      <td><a href='https://www.amazon.com/dp/{{i.asin}}'>Go Here!</a></td>
+			      <td>{{item.title}}</td>
+			      <td><img src="{{item.large_image_url}}" style="width:100px"></td>
+			      <td><a href='https://www.amazon.com/dp/{{item.asin}}'>Go Here!</a></td>
 			      <td>
 			      	<form action="{% url 'create' %}" method='post'>
 			      		{% csrf_token %}
-			      		<input type="hidden" name="item" value="{{i.title}}">
+			      		<input type="hidden" name="item" value="{{item.title}}">
 			      		<button>Add</button>
 			      	</form>
 			      </td>
