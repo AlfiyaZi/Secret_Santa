@@ -75,7 +75,12 @@
 			{% for item in my_items %}
 				<tr>
 					<td><a href="#">{{item.item.item}}</a></td>
-					<td>Remove</td>
+					<td>
+						<form action="{% url 'delete' item.item.id %}" method="POST">
+							{% csrf_token %}
+							<button>Remove</button>
+						</form>
+					</td>
 				</tr>
 			{% endfor %}
 		</table>

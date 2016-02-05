@@ -70,8 +70,6 @@ def dashboard(request):
 		'other_items': Wishlist.objects.all().exclude(user=request.session['user_id'])
 	}
 
-	print context;
-
 	return render(request, 'home/dashboard.html', context)
 
 def back(request):
@@ -98,6 +96,7 @@ def add(request):
 		'items': query,
 	}
 	
+
 	return render(request, 'home/add.html', item )
 
 def search(request):
@@ -116,4 +115,9 @@ def create(request):
 
 	Wishlist.objects.create(item=item[0], user=user[0])
 
+	return redirect('dashboard')
+
+def delete(request, item_id):
+
+	Item.objects.get(id=item_id).delete()
 	return redirect('dashboard')

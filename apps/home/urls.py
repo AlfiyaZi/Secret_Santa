@@ -9,6 +9,7 @@ urlpatterns = [
 	url(r'back/', views.back, name='back'),
 	url(r'logout/', views.logout, name='logout'),
 	url(r'add/', views.add, name='add'),
-	url(r'search', views.search, name='search'),
+	url(r'search/?$', views.search, name='search'),
 	url(r'create/', views.create, name='create'),
+	url(r'delete/(?P<item_id>\d+)/', views.delete, name='delete'),
 ]
