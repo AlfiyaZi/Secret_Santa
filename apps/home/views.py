@@ -96,9 +96,6 @@ def add(request):
 		'items': query,
 	}
 
-	print query
-	print amazon
-
 	return render(request, 'home/add.html', item)
 
 def search(request):
@@ -109,10 +106,14 @@ def search(request):
 def create(request):
 
 	user = User.objects.all().filter(id=request.session['user_id'])[:1]
-	item = request.POST['item']
-	Item.objects.create(item=item, user=user[0])
+	itemTitle = request.POST['item.title']
+	itemASIN = request.POST['item.asin']
+	itemImage = request.POST['item.imgURL']
+	itemPrice = request.POST['item.price']
+	print itemPrice
+	Item.objects.create(title=itemTitle, user=user[0], asin=itemASIN, imgURL=itemImage, price=itemPrice)
 
-	item_id = Item.objects.all().filter(item=item)[0].id
+	item_id = Item.objects.all().filter(title=itemTitle)[0].id
 	item = Item.objects.all().filter(id=item_id)
 
 	Wishlist.objects.create(item=item[0], user=user[0])

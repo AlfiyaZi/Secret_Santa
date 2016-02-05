@@ -9,7 +9,10 @@ class User(models.Model):
 		db_table = 'users'
 
 class Item(models.Model):
-	item = models.CharField(max_length=255)
+	title = models.CharField(max_length=255)
+	asin = models.CharField(max_length=255)
+	imgURL = models.CharField(max_length=255)
+	price = models.CharField(max_length=255)
 	user = models.ForeignKey(User)
 	class Meta:
 		db_table = 'items'

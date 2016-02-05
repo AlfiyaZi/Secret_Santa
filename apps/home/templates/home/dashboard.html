@@ -70,11 +70,15 @@
 		<table id="myWishList">
 			<tr>
 				<th>Item</th>
+				<th>Image</th>
+				<th>Price</th>
 				<th>Action</th>
 			</tr>
 			{% for item in my_items %}
 				<tr>
-					<td><a href="#">{{item.item.item}}</a></td>
+					<td><a href="https://www.amazon.com/dp/{{item.item.asin}}">{{item.item.title}}</a></td>
+					<td><img src='{{item.item.imgURL}}'></td>
+					<td>{{item.item.price}}</td>
 					<td>
 						<form action="{% url 'delete' item.item.id %}" method="POST">
 							{% csrf_token %}
