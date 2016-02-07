@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from apps.home.models import User, Item, Wishlist
 from amazon.api import AmazonAPI
-import bcrypt
+from random import randint
 
 
 amazon = AmazonAPI('AKIAIHLZRKVT4Z7YA4DA', 'hh9fH8KhGG3P9EhMP4gWmeqsLnQSkejQMNiHK5oF','dojo0d-20')
@@ -66,6 +66,7 @@ def dashboard(request):
 
 	context = {
 		'username': User.objects.get(id=request.session['user_id']).username,
+		'santa': User.objects.get(id=request.session['user_id']).santa,
 		'my_items': Wishlist.objects.all().filter(user=request.session['user_id']),
 		'other_items': Wishlist.objects.all().exclude(user=request.session['user_id'])
 	}
@@ -110,7 +111,6 @@ def create(request):
 	itemASIN = request.POST['item.asin']
 	itemImage = request.POST['item.imgURL']
 	itemPrice = request.POST['item.price']
-	print itemPrice
 	Item.objects.create(title=itemTitle, user=user[0], asin=itemASIN, imgURL=itemImage, price=itemPrice)
 
 	item_id = Item.objects.all().filter(title=itemTitle)[0].id
@@ -121,10 +121,32 @@ def create(request):
 	return redirect('dashboard')
 
 def random(request):
-	users = User.objects.all()
+
+	def randomize(allUsers, user):
+		random = randint(0, len(allUsers) - 1)
+		if allUsers[random].id != user.id:
+			return random
+		else:
+			return randomize(allUsers, user)
+
+	allUsers = User.objects.all()
+	users = []
+	for user in allUsers:
+		users.append(user)
+
 	print users
+	for user in users:
+		user = User.objects.get(id=user.id)
+		random = randomize(users, user)
+		user.santa = users[random].name
+		users.remove(users[random])
+		user.save()
 
 	return redirect('dashboard')
+	
+
+
+	
 
 def delete(request, item_id):
 
