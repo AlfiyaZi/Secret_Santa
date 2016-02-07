@@ -4,6 +4,7 @@ class User(models.Model):
 	name = models.CharField(max_length=255)
 	username = models.CharField(max_length=255)
 	password = models.CharField(max_length=255)
+	santa = models.CharField(max_length=255, blank=True, null=True)
 	admin = models.CharField(max_length=255)
 	class Meta:
 		db_table = 'users'
