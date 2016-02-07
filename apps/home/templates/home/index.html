@@ -2,9 +2,10 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Login and Registration</title>
+	<title>Super Secret Santa</title>
 	{% load staticfiles %}
 	<link rel="stylesheet" href="{% static 'home/style.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 	<script>
@@ -89,46 +90,122 @@
 	    });
   	}
 </script>
-
+    <!-- ===========================
+    NECESSARY SCRIPTS
+    =========================== --> 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="static/home/js/evenfly.js"></script>
+    <script src="static/home/js/jquery.nicescroll.min.js"></script>
+    <script src="static/home/js/wow.min.js"></script>
+    <script src="static/home/js/snowstorm-min.js"></script>
+    <script>new WOW().init();</script>    
+    <!-- ===========================
+    STYLESHEETS
+    =========================== --> 
+    <link rel="stylesheet" href="static/home/css/style.css">
+    <link rel="stylesheet" href="static/home/css/responsive.css">
+    <link rel="stylesheet" href="static/home/css/animate.css">   
+    <!-- ===========================
+    FONTS
+    =========================== -->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,900,600|Pacifico' rel='stylesheet' type='text/css'>
+    
 </head>
 <body>
-	<div id="wrapper">
-		<p>Welcome!</p>
-		<form id="register" action="{% url 'register' %}" method="POST">
-			{% csrf_token %}
-			<label>Name: <input type="text" name="name"></label>
-			<label>Username: <input type="text" name="username"></label>
-			<label>Password: <input type="password" name="password"></label>
-			<label>Confirm: <input type="password" name="confirm"></label>
-			<label>Admin Level: 
-				<select id="admin" name="admin">
-					<option value="user">User</option>
-					<option value="host">Host</option>
-				</select>
-			</label>
-			<label><button>Register</button></label>
-			{% if messages %}
-				{% for message in messages %}
-					{% if message.extra_tags == 'registration' %}
-						<p class="error">{{message}}</p>
-					{% endif %}
-				{% endfor %}
-			{% endif %}
-		</form>
-		<form id="login" action="{% url 'login' %}" method="POST">
-			{% csrf_token %}
-			<label>Username: <input type="text" name="username"></label>
-			<label>Password: <input type="password" name="password"></label>
-			<label><button>Login</button></label>
-			{% if messages %}
-				{% for message in messages %}
-					{% if message.extra_tags == 'login' %}
-						<p class="error">{{message}}</p>
-					{% endif %}
-				{% endfor %}
-			{% endif %}
-		</form><br>
+    <div id="hero">
+        <div class="redoverlay">
+            <div class="container">
+                <div class="row">
+                    <div class="herotext">
+                        <h2 class="wow zoomInDown" data-wow-duration="3s">Super Secret Santa</h2>
+                        <h1 class="wow flipInY">It’s The time</h1>
 
+                       
+
+                        <p class="wow fadeInUp" data-wow-duration="2s">It can be Christmas Year ROUND!!!</p>
+
+                        <img class="bigbell wow tada infinite" data-wow-duration="30s" src="../static/home/img/bell.png" alt="">
+                    </div>
+
+                    <div class="santa wow bounceInDown" data-wow-duration="2s">
+                        <img src="../static/home/img/santa.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--HERO SECTION END-->
+    <div id="overview" class="container">       
+        <!--SECTIONHEAD START-->
+        <div class="sectionhead">            
+            <h2>Best <span class="highlight">free</span> Secret Santa App Ever!!!!</h2>
+            <p>For all your Secret Santa Needs! Get all your friends together and lets get it crackin! Search for what you want courtesy of Amazon! Everything is laid out for you and your friends all you have to do is hit order!</p>
+            <hr>
+        </div><!--SECTIONHEAD END-->
+        
+        
+    </div><!--OVERVIEW SECTION END-->
+	<div class='container'>
+		<div class='register'>
+			<form action="{% url 'register' %}" method="POST">
+				{% csrf_token %}
+				<div class='col-lg-6'>
+					<h3>Register!</h3>
+					<div class='form-group'>
+						<label>Name:<input type="text" name="name" placeholder='Name'></label>
+					</div>
+					<div class='form-group'>
+						<label>Username:<input type="text" name="username" placeholder='Username'></label>
+					</div>
+					<div class='form-group'>
+						<label>Password:<input type="password" name="password" placeholder='DingleBerry'></label> 
+					</div>
+					<div class='form-group'>
+						<label>Confirm:<input type="password" name="confirm" placeholder='DingleBerry'></label>
+					</div>
+		 			<label>Admin Level: 
+						<select id="admin" name="admin">
+							<option value="user">User</option>
+							<option value="host">Host</option>
+						</select>
+					</label>
+					<div class='form-group'>
+						<label><button class='btn btn-primary'>Register</button></label>
+					</div>
+					{% if messages %}
+						{% for message in messages %}
+							{% if message.extra_tags == 'registration' %}
+								<p class="error">{{message}}</p>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+				</div>
+			</form>
+		</div>
+		<div class='login'>
+			<form class='form' action="{% url 'login' %}"  method="POST">
+				{% csrf_token %}
+				<div class='col-lg-6'>
+					<h3>Login</h3>
+					<div class='form-group'>
+						<label>Username:<input type="text" name="username" placeholder='Username'></label>
+					</div>
+					<div class='form-group'>
+						<label>Password:<input type="password" name="password" placeholder='Password'></label>
+					</div>
+					<div class='form-group'>
+						<label><button class='btn btn-primary'>Login</button></label>
+					</div>
+					{% if messages %}
+						{% for message in messages %}
+							{% if message.extra_tags == 'login' %}
+								<p class="error">{{message}}</p>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+				</div>
+			</form><br>
+		</div>
 		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
 		</fb:login-button>
 
@@ -136,6 +213,11 @@
 
 	<div id="status">
 	</div>
-
+	<footer class="container text-center">             
+        <h2 class="logo">Secret<span class="highlight">Santa</span></h2>
+        <img class="santacap" src="../static/home/img/santa_cap.png" alt="">
+        <P>Doin big thangs since da wintta of 0-15' ya feelz meh</P>
+        <hr>
+    </footer><!--FOOTER END-->
 </body>
 </html>
