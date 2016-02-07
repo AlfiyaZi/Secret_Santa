@@ -120,6 +120,12 @@ def create(request):
 
 	return redirect('dashboard')
 
+def random(request):
+	users = User.objects.all()
+	print users
+
+	return redirect('dashboard')
+
 def delete(request, item_id):
 
 	Item.objects.get(id=item_id).delete()

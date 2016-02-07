@@ -11,5 +11,6 @@ urlpatterns = [
 	url(r'add/', views.add, name='add'),
 	url(r'search/?$', views.search, name='search'),
 	url(r'create/', views.create, name='create'),
+	url(r'random/', views.random, name='random'),
 	url(r'delete/(?P<item_id>\d+)/', views.delete, name='delete'),
 ]
