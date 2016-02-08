@@ -144,7 +144,7 @@ def random(request):
 def reset(request):
 	allUsers = User.objects.all()
 	for user in allUsers:
-		user.santa = "None"
+		user.santa = "No One...yet"
 		user.save()
 
 	return redirect('dashboard')
