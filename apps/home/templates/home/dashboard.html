@@ -83,7 +83,7 @@
 			{% csrf_token %}
 				<button>Generate Secret Santas!</button>
 			</form>
-			<form action="" method="POST">
+			<form action="{% url 'reset' %}" method="POST">
 			{% csrf_token %}
 				<button>Reset</button>
 			</form>

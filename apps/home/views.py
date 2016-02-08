@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from apps.home.models import User, Item, Wishlist
 from amazon.api import AmazonAPI
-from random import randint
+from random import randint, shuffle
 
 
 amazon = AmazonAPI('AKIAIHLZRKVT4Z7YA4DA', 'hh9fH8KhGG3P9EhMP4gWmeqsLnQSkejQMNiHK5oF','dojo0d-20')
@@ -122,31 +122,32 @@ def create(request):
 
 def random(request):
 
-	def randomize(allUsers, user):
-		random = randint(0, len(allUsers) - 1)
-		if allUsers[random].id != user.id:
-			return random
-		else:
-			return randomize(allUsers, user)
-
+	#  allUsers is a queryset
 	allUsers = User.objects.all()
+	#  users is a mutable list
 	users = []
 	for user in allUsers:
 		users.append(user)
 
-	print users
+	shuffle(users)
+	count = 0
 	for user in users:
 		user = User.objects.get(id=user.id)
-		random = randomize(users, user)
-		user.santa = users[random].name
-		users.remove(users[random])
+		count += 1
+		if count == 3:
+			count = 0
+		user.santa = users[count].name
 		user.save()
 
 	return redirect('dashboard')
 	
+def reset(request):
+	allUsers = User.objects.all()
+	for user in allUsers:
+		user.santa = "None"
+		user.save()
 
-
-	
+	return redirect('dashboard')
 
 def delete(request, item_id):
 
