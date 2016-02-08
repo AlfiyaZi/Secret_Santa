@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User's Wishlist</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'home/style.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+</head>
+<body>
+	<a href="{% url 'back' %}">Back</a>
+	<div class="container">
+		<h1>{{user.name}}'s Wishlist Items:</h1>
+		<table>
+			<tr>
+				<th>Item Name</th>
+				<th>Image</th>
+				<th>Price</th>
+			</tr>
+			{% for item in items %}
+			<tr>
+				<td><a href="https://www.amazon.com/dp/{{item.item.asin}}">{{item.item.title}}</a></td>
+				<td><img src="{{item.item.imgURL}}"></td>
+				<td>{{item.item.price}}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+</body>
+</html>

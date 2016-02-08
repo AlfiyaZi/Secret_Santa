@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import forms
 from apps.home.models import User, Item, Wishlist
 from amazon.api import AmazonAPI
 from random import randint, shuffle
@@ -61,6 +62,7 @@ def dashboard(request):
 
 	context = {
 		'username': User.objects.get(id=request.session['user_id']).username,
+		'users': User.objects.all(),
 		'user_id': User.objects.get(id=request.session['user_id']).id,
 		'santa': User.objects.get(id=request.session['user_id']).santa,
 		'my_items': Wishlist.objects.all().filter(user=request.session['user_id']),
@@ -87,11 +89,12 @@ def add(request):
 		request.session['keyword'] = ''
 		query = ""
 
-	item = {
+	context = {
+		'username': User.objects.get(id=request.session['user_id']).username,
 		'items': query,
 	}
 
-	return render(request, 'home/add.html', item)
+	return render(request, 'home/add.html', context)
 
 def search(request):
 
@@ -141,7 +144,7 @@ def random(request):
 def reset(request):
 	allUsers = User.objects.all()
 	for user in allUsers:
-		user.santa = "None"
+		user.santa = "No One...yet"
 		user.save()
 
 	return redirect('dashboard')
@@ -150,6 +153,16 @@ def deleteItem(request, item_id):
 
 	Item.objects.get(id=item_id).delete()
 	return redirect('dashboard')
+
+def user(request, user_id):
+	user = User.objects.get(id=user_id)
+
+	context = {
+		'user': User.objects.get(id=user_id),
+		'items': Wishlist.objects.all().filter(user=user_id),
+	}
+
+	return render(request, 'home/user.html', context)
 
 def deleteAcct(request, user_id):
 
