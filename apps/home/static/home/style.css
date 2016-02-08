@@ -8,3 +8,26 @@
 .register{
 	text-align: center;
 }
+/* --------------------- 
+DASHBOARD SECTION
+--------------------- */
+#dashboard {
+    text-align: center;
+    height: 300px;
+    color: #fff;
+    background: url(../home/img/christmas.jpg) fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+/* --------------------- 
+ADD SECTION
+--------------------- */
+#add {
+    text-align: center;
+    height: 300px;
+    color: #fff;
+    background: url(../home/img/christmas.jpg) fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}

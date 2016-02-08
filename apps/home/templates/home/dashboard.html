@@ -62,8 +62,8 @@
     STYLESHEETS
     =========================== --> 
 	
-    <link rel="stylesheet" href="static/home/css/style.css">
-    <link rel="stylesheet" href="static/home/css/responsive.css">
+    <!-- <link rel="stylesheet" href="static/home/css/style.css">
+    <link rel="stylesheet" href="static/home/css/responsive.css"> -->
       
 	<!-- ===========================
     FONTS
@@ -72,71 +72,79 @@
 
 </head>
 <body>
-	<div class='container'>
-		<div id="topNav">
+	<div id="dashboard">
+		<div class='container'>
+			<div id="topNav">
+				<div class='text-center'>
+					<h2>Welcome {{username}}!</h2>
+					<h3>You are a Secret Santa to: {{santa}}</h3>
+					<a href="{% url 'logout' %}">Logout</a>
+				</div>
+			</div><!--end topNav -->
+		</div> <!-- end container -->
+	</div><!-- end dashboard -->
+	<div id='wishlist'>
+		<div class='container'>
+			<h2 class='text-center'>My Wish List</h2>
+			<table id="myWishList" class='table table-striped'>
+				<tr>
+					<th>Item</th>
+					<th>Image</th>
+					<th>Price</th>
+					<th>Action</th>
+				</tr>
+				{% for item in my_items %}
+					<tr>
+						<td><a href="https://www.amazon.com/dp/{{item.item.asin}}">{{item.item.title}}</a></td>
+						<td><img src='{{item.item.imgURL}}'></td>
+						<td>${{item.item.price}}</td>
+						<td>
+							<form action="{% url 'deleteItem' item.item.id %}" method="POST">
+								{% csrf_token %}
+								<button class='btn btn-primary'>Remove</button>
+							</form>
+						</td>
+					</tr>
+				{% endfor %}
+			</table>
 			<div class='text-center'>
-				<h2>Welcome {{username}}!</h2>
-				<h3>You are a Secret Santa to: {{santa}}</h3>
-				<a href="{% url 'logout' %}">Logout</a>
+				<a href="{% url 'add' %}" ><button class='btn btn-primary'>Add an item</button></a>
 			</div>
-
-			<form action="{% url 'random' %}" method="POST">
-			{% csrf_token %}
-				<button>Generate Secret Santas!</button>
-			</form>
-
-			<form action="{% url 'reset' %}" method="POST">
-			{% csrf_token %}
-				<button>Reset</button>
-			</form>
-
-			<form action="{% url 'deleteAcct' user_id %}" method="POST">
-			{% csrf_token %}
-				<button>Delete My Account</button>
-			</form>
-
-		</div>
-		<p>My Wish List</p>
-		<table id="myWishList" class='table table-striped'>
-			<tr>
-				<th>Item</th>
-				<th>Image</th>
-				<th>Price</th>
-				<th>Action</th>
-			</tr>
-			{% for item in my_items %}
+			<h2 class='text-center'>User's Wish List</h2>
+			<table id="otherWishList" class='table table-striped'>
+				<tr>
+					<th>Item</th>
+					<th>Image</th>
+					<th>Price</th>
+					<th>Friend</th>
+				</tr>
+				{% for item in other_items %}
 				<tr>
 					<td><a href="https://www.amazon.com/dp/{{item.item.asin}}">{{item.item.title}}</a></td>
-					<td><img src='{{item.item.imgURL}}'></td>
+					<td><img src="{{item.item.imgURL}}"></td>
 					<td>${{item.item.price}}</td>
-					<td>
-						<form action="{% url 'deleteItem' item.item.id %}" method="POST">
-							{% csrf_token %}
-							<button>Remove</button>
-						</form>
-					</td>
+					<td>{{item.item.user.name}}</td>
 				</tr>
-			{% endfor %}
-		</table>
-		<a href="{% url 'add' %}">Add an item</a>
+				{% endfor %}
+			</table>
+			<div> <!-- Buttons that do shit -->
 
-		<p>User's Wish List</p>
-		<table id="otherWishList">
-			<tr>
-				<th>Item</th>
-				<th>Image</th>
-				<th>Price</th>
-				<th>Friend</th>
-			</tr>
-			{% for item in other_items %}
-			<tr>
-				<td><a href="https://www.amazon.com/dp/{{item.item.asin}}">{{item.item.title}}</a></td>
-				<td><img src="{{item.item.imgURL}}"></td>
-				<td>${{item.item.price}}</td>
-				<td>{{item.item.user.name}}</td>
-			</tr>
-			{% endfor %}
-		</table>
-	</div>
+				<form action="{% url 'random' %}" method="POST">
+				{% csrf_token %}
+					<button class='btn btn-primary'>Generate Secret Santas!</button>
+				</form>
+
+				<form action="{% url 'reset' %}" method="POST">
+				{% csrf_token %}
+					<button class='btn btn-primary'>Reset</button>
+				</form>
+
+				<form action="{% url 'deleteAcct' user_id %}" method="POST">
+				{% csrf_token %}
+					<button class='btn btn-primary'>Delete My Account</button>
+				</form>
+		</div>
+	</div><!--wishlist div -->
+
 </body>
 </html>

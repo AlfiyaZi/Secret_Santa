@@ -5,6 +5,7 @@
 	<title>Add an Item</title>
 	{% load staticfiles %}
 	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'home/style.css' %}">
 	<script type="text/javascript">
 
 		if (window.XMLHttpRequest) {
@@ -14,65 +15,77 @@
 		}
 
 	</script>
+	<style>
+		body {
+			background: white url("static/home/img/christmas.jpg") no-repeat right bottom;
+		}
+	</style>
 </head>
 <body>
-	<div class="container">
-		<div class="text-center">
-			<h1>Welcome User</h1>
-			<a href="{% url 'back' %}">Back</a>
-		</div> <!-- End div -->
-		<div class="text-center">
-			{% if items == "" %}
-				<h1>NO MATCH!</h1>
-			{% endif %}
+	<div id='add'>
+		<div class="container">
+			<div class="text-center">
+				<h1>Welcome User</h1>
+				<a href="{% url 'back' %}">Back</a>
+			</div> <!-- End div -->
+		</div><!-- end container -->
+	</div><!-- end add -->
+	<div id='search'>
+		<div class='container'>
+			<div class="text-center">
+				{% if items == "" %}
+					<h1>NO MATCH!</h1>
+				{% endif %}
 
-			{% for i in lookup %}
-				<p>{{i.images}}</p>
-			{% endfor %}
-			<table class="table table-bordered">
-			  	<caption>Your Results!</caption>
-			  	<thead>
-			   	<tr>
-			      	<th>Item</th>
-			      	<th>Image</th>
-			      	<th>Price</th>
-			      	<th>Link</th>
-			      	<th>Add</th>
-			    </tr>
-			  </thead>
-			{% for item in items %}
-			  <tbody>
-			  <form action="{% url 'create' %}" method='post'>
-			  {% csrf_token %}
-			    <tr>
-			      <td>{{item.title}}</td>
-			      <td><img src="{{item.small_image_url}}" style="width:100px"></td>
-			      {% for price in item.price_and_currency %}
-			      	{% if price != "USD" %}
-			      		<td>${{price}}</td>
-			      		<input type="hidden" name="item.price" value="{{price}}">
-			      	{% endif %}
-			      {% endfor %}
-			      <td><a href='https://www.amazon.com/dp/{{item.asin}}'>Go Here!</a></td>
-			      <td>
-			      	<input type="hidden" name="item.title" value="{{item.title}}">
-			      	<input type="hidden" name="item.asin" value="{{item.asin}}">
-			      	<input type="hidden" name="item.imgURL" value="{{item.small_image_url}}">
-			      	<button>Add</button>
-			      </td>
-			    </tr>
-			    </form>
-			  </tbody>
-			{% endfor %}
-			</table>
-			
-			
-			<form action='/search' method='post'>
-					{% csrf_token %}
-				<input type='text' name='search' placeholder="Enter Item Here!">
-				<input type='submit'value ='Search!'>
-			</form>
+				{% for i in lookup %}
+					<p>{{i.images}}</p>
+				{% endfor %}
+				<table class="table table-striped">
+				  	<caption>Your Results!</caption>
+				  	<thead>
+				   	<tr>
+				      	<th>Item</th>
+				      	<th>Image</th>
+				      	<th>Price</th>
+				      	<th>Link</th>
+				      	<th>Add</th>
+				    </tr>
+				  </thead>
+				{% for item in items %}
+				  <tbody>
+				  <form action="{% url 'create' %}" method='post'>
+				  {% csrf_token %}
+				    <tr>
+				      <td>{{item.title}}</td>
+				      <td><img src="{{item.small_image_url}}" style="width:100px"></td>
+				      {% for price in item.price_and_currency %}
+				      	{% if price != "USD" %}
+				      		<td>${{price}}</td>
+				      		<input type="hidden" name="item.price" value="{{price}}">
+				      	{% endif %}
+				      {% endfor %}
+				      <td><a href='https://www.amazon.com/dp/{{item.asin}}'>Go Here!</a></td>
+				      <td>
+				      	<input type="hidden" name="item.title" value="{{item.title}}">
+				      	<input type="hidden" name="item.asin" value="{{item.asin}}">
+				      	<input type="hidden" name="item.imgURL" value="{{item.small_image_url}}">
+				      	<button class='btn btn-primary'>Add</button>
+				      </td>
+				    </tr>
+				    </form>
+				  </tbody>
+				{% endfor %}
+				</table>
+				
+				
+				<form action='/search' method='post'>
+						{% csrf_token %}
+					<input type='text' name='search' placeholder="Enter Item Here!">
+					<input type='submit'value ='Search!' class='btn btn-primary'>
+				</form>
+			</div>
 		</div>
-	</div>
+	</div><!--end of search -->
+	
 </body>
 </html>
