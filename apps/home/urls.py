@@ -13,6 +13,7 @@ urlpatterns = [
 	url(r'create/', views.create, name='create'),
 	url(r'random/', views.random, name='random'),
 	url(r'reset/', views.reset, name='reset'),
+	url(r'user/(?P<user_id>\d+)/', views.user, name='user'),
 	url(r'deleteAcct/(?P<user_id>\d+)/', views.deleteAcct, name='deleteAcct'),
 	url(r'deleteItem/(?P<item_id>\d+)/', views.deleteItem, name='deleteItem'),
 ]

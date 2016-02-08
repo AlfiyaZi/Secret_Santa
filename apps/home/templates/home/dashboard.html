@@ -76,7 +76,7 @@
 		<div id="topNav">
 			<div class='text-center'>
 				<h2>Welcome {{username}}!</h2>
-				<h3>You are a Secret Santa to: {{santa}}</h3>
+				<h3>You are a Secret Santa to: <a href="{% url 'user' user_id %}">{{santa}}</a></h3>
 				<a href="{% url 'logout' %}">Logout</a>
 			</div>
 
@@ -133,7 +133,7 @@
 				<td><a href="https://www.amazon.com/dp/{{item.item.asin}}">{{item.item.title}}</a></td>
 				<td><img src="{{item.item.imgURL}}"></td>
 				<td>${{item.item.price}}</td>
-				<td>{{item.item.user.name}}</td>
+				<td><a href="{% url 'user' item.item.user.id %}">{{item.item.user.name}}</a></td>
 			</tr>
 			{% endfor %}
 		</table>

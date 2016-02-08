@@ -62,6 +62,7 @@ def dashboard(request):
 
 	context = {
 		'username': User.objects.get(id=request.session['user_id']).username,
+		'users': User.objects.all(),
 		'user_id': User.objects.get(id=request.session['user_id']).id,
 		'santa': User.objects.get(id=request.session['user_id']).santa,
 		'my_items': Wishlist.objects.all().filter(user=request.session['user_id']),
@@ -152,6 +153,16 @@ def deleteItem(request, item_id):
 
 	Item.objects.get(id=item_id).delete()
 	return redirect('dashboard')
+
+def user(request, user_id):
+	user = User.objects.get(id=user_id)
+
+	context = {
+		'user': User.objects.get(id=user_id),
+		'items': Wishlist.objects.all().filter(user=user_id),
+	}
+
+	return render(request, 'home/user.html', context)
 
 def deleteAcct(request, user_id):
 
