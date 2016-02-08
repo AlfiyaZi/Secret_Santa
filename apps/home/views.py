@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import forms
 from apps.home.models import User, Item, Wishlist
 from amazon.api import AmazonAPI
 from random import randint, shuffle
@@ -87,11 +88,12 @@ def add(request):
 		request.session['keyword'] = ''
 		query = ""
 
-	item = {
+	context = {
+		'username': User.objects.get(id=request.session['user_id']).username,
 		'items': query,
 	}
 
-	return render(request, 'home/add.html', item)
+	return render(request, 'home/add.html', context)
 
 def search(request):
 
