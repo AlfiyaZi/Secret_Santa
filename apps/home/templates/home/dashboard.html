@@ -79,14 +79,22 @@
 				<h3>You are a Secret Santa to: {{santa}}</h3>
 				<a href="{% url 'logout' %}">Logout</a>
 			</div>
+
 			<form action="{% url 'random' %}" method="POST">
 			{% csrf_token %}
 				<button>Generate Secret Santas!</button>
 			</form>
+
 			<form action="{% url 'reset' %}" method="POST">
 			{% csrf_token %}
 				<button>Reset</button>
 			</form>
+
+			<form action="{% url 'deleteAcct' user_id %}" method="POST">
+			{% csrf_token %}
+				<button>Delete My Account</button>
+			</form>
+
 		</div>
 		<p>My Wish List</p>
 		<table id="myWishList" class='table table-striped'>
@@ -102,7 +110,7 @@
 					<td><img src='{{item.item.imgURL}}'></td>
 					<td>${{item.item.price}}</td>
 					<td>
-						<form action="{% url 'delete' item.item.id %}" method="POST">
+						<form action="{% url 'deleteItem' item.item.id %}" method="POST">
 							{% csrf_token %}
 							<button>Remove</button>
 						</form>
