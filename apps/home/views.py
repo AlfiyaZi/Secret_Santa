@@ -2,8 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from apps.home.models import User, Item, Wishlist
 from amazon.api import AmazonAPI
-import bcrypt
-
+from random import randint, shuffle
 
 amazon = AmazonAPI('AKIAIHLZRKVT4Z7YA4DA', 'hh9fH8KhGG3P9EhMP4gWmeqsLnQSkejQMNiHK5oF','dojo0d-20')
 
@@ -37,8 +36,6 @@ def register(request):
 		errors += 1
 
 	if errors == 0:
-		# password = password.encode("utf-8")
-		# pw_hash = bcrypt.hashpw(password, bcrypt.gensalt())
 		User.objects.create(name=name, username=username, password=password, admin=admin)
 		messages.add_message(request, messages.INFO, 'Successfully Registered!', extra_tags="registration")
 
@@ -53,8 +50,6 @@ def login(request):
 		messages.add_message(request, messages.INFO, 'Username is invalid', extra_tags="login")
 		return redirect('/')
 	else:
-		# pw_hash = User.objects.all().filter(username=username)[:1][0].password
-		# if bcrypt.hashpw(password, pw_hash) == pw_hash:
 		if User.objects.all().filter(username=username)[0].password != password:
 			messages.add_message(request, messages.INFO, 'Password is invalid', extra_tags="login")
 			return redirect('/')
@@ -66,6 +61,8 @@ def dashboard(request):
 
 	context = {
 		'username': User.objects.get(id=request.session['user_id']).username,
+		'user_id': User.objects.get(id=request.session['user_id']).id,
+		'santa': User.objects.get(id=request.session['user_id']).santa,
 		'my_items': Wishlist.objects.all().filter(user=request.session['user_id']),
 		'other_items': Wishlist.objects.all().exclude(user=request.session['user_id'])
 	}
@@ -90,8 +87,6 @@ def add(request):
 		request.session['keyword'] = ''
 		query = ""
 
-	# lookup = amazon.lookup(ItemId ='B00251VAGK')
-	# print lookup['images']
 	item = {
 		'items': query,
 	}
@@ -110,7 +105,6 @@ def create(request):
 	itemASIN = request.POST['item.asin']
 	itemImage = request.POST['item.imgURL']
 	itemPrice = request.POST['item.price']
-	print itemPrice
 	Item.objects.create(title=itemTitle, user=user[0], asin=itemASIN, imgURL=itemImage, price=itemPrice)
 
 	item_id = Item.objects.all().filter(title=itemTitle)[0].id
@@ -120,7 +114,49 @@ def create(request):
 
 	return redirect('dashboard')
 
-def delete(request, item_id):
+def random(request):
+
+	#  allUsers is a queryset
+	allUsers = User.objects.all()
+	#  users is a mutable list
+	users = []
+	for user in allUsers:
+		users.append(user)
+
+	#  shuffles user list
+	shuffle(users)
+	count = 0
+
+	#  updates santa attribute in DB
+	for user in users:
+		user = User.objects.get(id=user.id)
+		count += 1
+		if count == len(allUsers):
+			count = 0
+		user.santa = users[count].name
+		user.save()
+
+	return redirect('dashboard')
+	
+def reset(request):
+	allUsers = User.objects.all()
+	for user in allUsers:
+		user.santa = "None"
+		user.save()
+
+	return redirect('dashboard')
+
+def deleteItem(request, item_id):
 
 	Item.objects.get(id=item_id).delete()
 	return redirect('dashboard')
+
+def deleteAcct(request, user_id):
+
+	user = User.objects.get(id=user_id)
+	user.delete()
+
+	return redirect('/')
+
+
+
