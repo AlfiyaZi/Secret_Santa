@@ -30,11 +30,13 @@ DASHBOARD SECTION
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
-
+a{
+	word-wrap: break-word;
+}
 /* --------------------- 
 ADD, USER SECTION
 --------------------- */
-#add, #user {
+#add, #user, #register{
     text-align: center;
     height: 300px;
     color: #fff;

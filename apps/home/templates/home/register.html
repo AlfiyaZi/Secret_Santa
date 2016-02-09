@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Register</title>
+		{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'home/style.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+	<!-- ===========================
+    FONTS
+    =========================== -->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,900,600|Pacifico' rel='stylesheet' type='text/css'>
+    <!-- ===========================
+    STYLESHEETS
+    =========================== --> 
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/responsive.css' %}">
+</head>
+<body>
+	<div id='register'>
+		<div class='container'>
+			<h2>Sign-up now to start your awesome <span class='highlight'>Christmas!</span></h2>
+			<a href="{% url 'index' %}">Back</a>
+		</div>
+	</div>
+	<div class='container'>
+		<div class='text-center'>
+			<form class='form-inline' action="{% url 'register' %}" method="POST">
+					{% csrf_token %}
+				<h3>Register!</h3>
+				<div class='form-group'>
+					<label>Name:<input type="text" name="name" placeholder='Name'></label>
+				</div>
+				<div class='form-group'>
+					<label>Username:<input type="text" name="username" placeholder='Username'></label>
+				</div><br>
+				<div class='form-group'>
+					<label>Password:<input type="password" name="password" placeholder='DingleBerry'></label> 
+				</div>
+				<div class='form-group'>
+					<label>Confirm:<input type="password" name="confirm" placeholder='DingleBerry'></label>
+				</div>
+			 		<label>Admin Level: 
+						<select id="admin" name="admin">
+							<option value="user">User</option>
+							<option value="host">Host</option>
+						</select>
+					</label><br>
+				<div class='form-group'>
+					<label><button class='btn btn-primary'>Register</button></label>
+				</div>
+					{% if messages %}
+						{% for message in messages %}
+							{% if message.extra_tags == 'registration' %}
+									<p class="error">{{message}}</p>
+							{% endif %}
+						{% endfor %}
+					{% endif %}
+			</form>
+		</div>
+	</div>
+	<footer class="container text-center">             
+        <h2 class="logo">Secret<span class="highlight">Santa</span></h2>
+        <img class="santacap" src="../static/home/img/santa_cap.png" alt="">
+        <P>Workin for dem dollahz yeh!</P>
+       
+    </footer><!--FOOTER END-->
+</body>
+</html>

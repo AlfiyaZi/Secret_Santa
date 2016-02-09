@@ -16,4 +16,6 @@ urlpatterns = [
 	url(r'user/(?P<user_id>\d+)/', views.user, name='user'),
 	url(r'deleteAcct/(?P<user_id>\d+)/', views.deleteAcct, name='deleteAcct'),
 	url(r'deleteItem/(?P<item_id>\d+)/', views.deleteItem, name='deleteItem'),
+	url(r'login_reg/', views.login_reg, name='login_reg'),
+	url(r'login_page/', views.login_page, name='login_page'),
 ]

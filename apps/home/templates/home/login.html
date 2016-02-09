@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'home/style.css' %}">
+	<link rel="stylesheet" href="{% static 'home/css/bootstrap.min.css' %}">
+	<!-- ===========================
+    FONTS
+    =========================== -->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,900,600|Pacifico' rel='stylesheet' type='text/css'>
+    <!-- ===========================
+    STYLESHEETS
+    =========================== --> 
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'home/css/responsive.css' %}">
+</head>
+<body>
+	<div id='register'>
+		<div class='container'>
+			<h2>Login to your acount here</h2>
+			<a href="{% url 'index' %}">Back</a>
+		</div>
+	</div>
+	<div class='container'>
+		<div class='text-center'>
+			<form class='form' action="{% url 'login' %}"  method="POST">
+				{% csrf_token %}
+				<h3>Login</h3>
+				<div class='form-group'>
+					<label>Username:<input type="text" name="username" placeholder='Username'></label>
+				</div>
+				<div class='form-group'>
+					<label>Password:<input type="password" name="password" placeholder='Password'></label>
+				</div>
+				<div class='form-group'>
+					<label><button class='btn btn-primary'>Login</button></label>
+				</div>
+				{% if messages %}
+					{% for message in messages %}
+						{% if message.extra_tags == 'login' %}
+							<p class="error">{{message}}</p>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+			</form>
+		</div>
+	</div>
+	<footer class="container text-center">             
+        <h2 class="logo">Secret<span class="highlight">Santa</span></h2>
+        <img class="santacap" src="../static/home/img/santa_cap.png" alt="">
+        <P>Poppin bottles cuz we dem boyz from da block!</P>
+       
+    </footer><!--FOOTER END-->
+</body>
+</html>

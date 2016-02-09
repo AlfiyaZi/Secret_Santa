@@ -140,84 +140,25 @@
         <div class="sectionhead">            
             <h2>Best <span class="highlight">free</span> Secret Santa App Ever!!!!</h2>
             <p>For all your Secret Santa Needs! Get all your friends together and lets get it crackin! Search for what you want courtesy of Amazon! Everything is laid out for you and your friends all you have to do is hit order!</p>
-            <hr>
+            
         </div><!--SECTIONHEAD END-->
         
         
     </div><!--OVERVIEW SECTION END-->
-	<div class='container'>
-		<div class='register'>
-			<form action="{% url 'register' %}" method="POST">
-				{% csrf_token %}
-				<div class='col-lg-6'>
-					<h3>Register!</h3>
-					<div class='form-group'>
-						<label>Name:<input type="text" name="name" placeholder='Name'></label>
-					</div>
-					<div class='form-group'>
-						<label>Username:<input type="text" name="username" placeholder='Username'></label>
-					</div>
-					<div class='form-group'>
-						<label>Password:<input type="password" name="password" placeholder='DingleBerry'></label> 
-					</div>
-					<div class='form-group'>
-						<label>Confirm:<input type="password" name="confirm" placeholder='DingleBerry'></label>
-					</div>
-		 			<label>Admin Level: 
-						<select id="admin" name="admin">
-							<option value="user">User</option>
-							<option value="host">Host</option>
-						</select>
-					</label>
-					<div class='form-group'>
-						<label><button class='btn btn-primary'>Register</button></label>
-					</div>
-					{% if messages %}
-						{% for message in messages %}
-							{% if message.extra_tags == 'registration' %}
-								<p class="error">{{message}}</p>
-							{% endif %}
-						{% endfor %}
-					{% endif %}
-				</div>
-			</form>
-		</div>
-		<div class='login'>
-			<form class='form' action="{% url 'login' %}"  method="POST">
-				{% csrf_token %}
-				<div class='col-lg-6'>
-					<h3>Login</h3>
-					<div class='form-group'>
-						<label>Username:<input type="text" name="username" placeholder='Username'></label>
-					</div>
-					<div class='form-group'>
-						<label>Password:<input type="password" name="password" placeholder='Password'></label>
-					</div>
-					<div class='form-group'>
-						<label><button class='btn btn-primary'>Login</button></label>
-					</div>
-					{% if messages %}
-						{% for message in messages %}
-							{% if message.extra_tags == 'login' %}
-								<p class="error">{{message}}</p>
-							{% endif %}
-						{% endfor %}
-					{% endif %}
-				</div>
-			</form><br>
-		</div>
-		<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-		</fb:login-button>
 
+	<div class='text-center'>
+		<div class='container'>
+			<a href="{% url 'login_reg' %}">Don't have an account?</a> | <a href="{% url 'login_page' %}">Log into your account</a>
+		</div>
 	</div>
-
-	<div id="status">
+	<div class='container text-center'>
+		<div id="status"></div>
 	</div>
 	<footer class="container text-center">             
         <h2 class="logo">Secret<span class="highlight">Santa</span></h2>
         <img class="santacap" src="../static/home/img/santa_cap.png" alt="">
         <P>Doin big thangs since da wintta of 0-15' ya feelz meh</P>
-        <hr>
+        
     </footer><!--FOOTER END-->
 </body>
 </html>

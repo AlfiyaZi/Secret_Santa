@@ -171,5 +171,9 @@ def deleteAcct(request, user_id):
 
 	return redirect('/')
 
+def login_reg(request):
+	return render(request, 'home/register.html')
 
+def login_page(request):
+	return render(request, 'home/login.html')
 
