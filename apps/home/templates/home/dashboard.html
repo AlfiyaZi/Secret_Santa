@@ -58,12 +58,12 @@
         });
     }
 	</script>
+
 	<!-- ===========================
-    STYLESHEETS
+    Responsive
     =========================== --> 
 	
-    <!-- <link rel="stylesheet" href="static/home/css/style.css">
-    <link rel="stylesheet" href="static/home/css/responsive.css"> -->
+    <link rel="stylesheet" href="static/home/css/responsive.css">
       
 	<!-- ===========================
     FONTS
@@ -110,6 +110,12 @@
 			<div class='text-center'>
 				<a href="{% url 'add' %}" ><button class='btn btn-primary'>Add an item</button></a>
 			</div>
+			<h4>List of friends participating in this Secret Santa:</h4>
+			<ul>
+				{% for user in users %}
+						<li><a href="{% url 'user' user.id %}">{{user.name}}</a></li>
+				{% endfor %}
+			</ul>
 			<h2 class='text-center'>User's Wish List</h2>
 			<table id="otherWishList" class='table table-striped'>
 				<tr>
@@ -125,7 +131,6 @@
 					<td>${{item.item.price}}</td>
 					<td>{{item.item.user.name}}</td>
 				</tr>
-<<<<<<< HEAD
 				{% endfor %}
 			</table>
 			<div> <!-- Buttons that do shit -->
@@ -147,34 +152,5 @@
 		</div>
 	</div><!--wishlist div -->
 
-=======
-			{% endfor %}
-		</table>
-		<a href="{% url 'add' %}">Add an item</a>
-		<h4>List of friends participating in this Secret Santa:</h4>
-		<ul>
-		{% for user in users %}
-			<li><a href="{% url 'user' user.id %}">{{user.name}}</a></li>
-		{% endfor %}
-		</ul>
-		<p>User's Wish List</p>
-		<table id="otherWishList">
-			<tr>
-				<th>Item</th>
-				<th>Image</th>
-				<th>Price</th>
-				<th>Friend</th>
-			</tr>
-			{% for item in other_items %}
-			<tr>
-				<td><a href="https://www.amazon.com/dp/{{item.item.asin}}">{{item.item.title}}</a></td>
-				<td><img src="{{item.item.imgURL}}"></td>
-				<td>${{item.item.price}}</td>
-				<td><a href="{% url 'user' item.item.user.id %}">{{item.item.user.name}}</a></td>
-			</tr>
-			{% endfor %}
-		</table>
-	</div>
->>>>>>> 7da993d0d1bcb5760cf7b373ff4b6b29ff16f47f
 </body>
 </html>

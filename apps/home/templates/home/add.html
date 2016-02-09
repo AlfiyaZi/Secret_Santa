@@ -20,13 +20,17 @@
 			background: white url("static/home/img/christmas.jpg") no-repeat right bottom;
 		}
 	</style>
+	<!-- ===========================
+    FONTS
+    =========================== -->
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,900,600|Pacifico' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<<<<<<< HEAD
 	<div id='add'>
 		<div class="container">
 			<div class="text-center">
-				<h1>Welcome User</h1>
+				<h2><span class="highlight">Welcome User</span></h2>
+				<p>
 				<a href="{% url 'back' %}">Back</a>
 			</div> <!-- End div -->
 		</div><!-- end container -->
@@ -37,17 +41,6 @@
 				{% if items == "" %}
 					<h1>NO MATCH!</h1>
 				{% endif %}
-=======
-	<div class="container">
-		<div class="text-center">
-			<h1>Welcome {{username}}</h1>
-			<a href="{% url 'back' %}">Back</a>
-		</div> <!-- End div -->
-		<div class="text-center">
-			{% if items == "" %}
-				<h1>NO MATCH!</h1>
-			{% endif %}
->>>>>>> 7da993d0d1bcb5760cf7b373ff4b6b29ff16f47f
 
 				{% for i in lookup %}
 					<p>{{i.images}}</p>

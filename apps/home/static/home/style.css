@@ -2,11 +2,22 @@
 	margin: 0;
 	padding: 0;
 }
+body {font-family: 'Raleway', sans-serif;}
 .login{
 	text-align: center;
 }
 .register{
 	text-align: center;
+}
+.highlight {color: #f53f2c;}
+h1 {font-size: 138px;}
+h2 {font-family: 'Pacifico', cursive;}
+h4 {font-weight: 600;}
+
+p {
+    font-size: 13px;
+    line-height: 1.7em;
+    color: #b2b2b2;
 }
 /* --------------------- 
 DASHBOARD SECTION
