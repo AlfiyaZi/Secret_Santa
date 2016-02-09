@@ -167,7 +167,7 @@ DASHBOARD SECTION
     text-align: center;
     height: 560px;
     color: #fff;
-    background: url(../static/home/img/bg.jpg) fixed;
+    background: url(../img/christmas.jpg) fixed;
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }

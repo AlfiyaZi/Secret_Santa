@@ -32,9 +32,9 @@ DASHBOARD SECTION
 }
 
 /* --------------------- 
-ADD SECTION
+ADD, USER SECTION
 --------------------- */
-#add {
+#add, #user {
     text-align: center;
     height: 300px;
     color: #fff;
@@ -42,6 +42,9 @@ ADD SECTION
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
+<<<<<<< HEAD
 button {
 	color: gold;
 }
+=======
+>>>>>>> 7c2fcd145a387e4b51a8d7928e09d584ab7dd1ea
