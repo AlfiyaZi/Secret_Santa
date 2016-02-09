@@ -32,9 +32,9 @@ DASHBOARD SECTION
 }
 
 /* --------------------- 
-ADD SECTION
+ADD, USER SECTION
 --------------------- */
-#add {
+#add, #user {
     text-align: center;
     height: 300px;
     color: #fff;
