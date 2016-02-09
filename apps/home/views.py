@@ -40,7 +40,7 @@ def register(request):
 		User.objects.create(name=name, username=username, password=password, admin=admin)
 		messages.add_message(request, messages.INFO, 'Successfully Registered!', extra_tags="registration")
 
-	return redirect('/')
+	return redirect('login_page')
 
 def login(request):
 
@@ -49,11 +49,11 @@ def login(request):
 
 	if not User.objects.all().filter(username=username):
 		messages.add_message(request, messages.INFO, 'Username is invalid', extra_tags="login")
-		return redirect('/')
+		return redirect('login_page')
 	else:
 		if User.objects.all().filter(username=username)[0].password != password:
 			messages.add_message(request, messages.INFO, 'Password is invalid', extra_tags="login")
-			return redirect('/')
+			return redirect('login_page')
 		else:
 			request.session['user_id'] = User.objects.all().filter(username=username)[0].id
 			return redirect('dashboard')
