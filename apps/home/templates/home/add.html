@@ -38,6 +38,11 @@
 	<div id='search'>
 		<div class='container'>
 			<div class="text-center">
+				<form action='/search' method='post' style="margin-top:20px">
+						{% csrf_token %}
+					<input type='text' name='search' placeholder="Enter Item Here!">
+					<input type='submit'value ='Search!' class='btn btn-primary'>
+				</form>
 				{% if items == "" %}
 					<h1>NO MATCH!</h1>
 				{% endif %}
@@ -45,7 +50,7 @@
 				{% for i in lookup %}
 					<p>{{i.images}}</p>
 				{% endfor %}
-				<table class="table table-striped">
+				<table class="table table-striped table-bordered">
 				  	<caption>Your Results!</caption>
 				  	<thead>
 				   	<tr>
@@ -81,13 +86,7 @@
 				  </tbody>
 				{% endfor %}
 				</table>
-				
-				
-				<form action='/search' method='post'>
-						{% csrf_token %}
-					<input type='text' name='search' placeholder="Enter Item Here!">
-					<input type='submit'value ='Search!' class='btn btn-primary'>
-				</form>
+
 			</div>
 		</div>
 	</div><!--end of search -->

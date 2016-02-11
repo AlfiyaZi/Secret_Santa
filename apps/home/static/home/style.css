@@ -44,9 +44,19 @@ ADD, USER SECTION
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
-<<<<<<< HEAD
-button {
-	color: gold;
+.form-register{
+	width: 570px;
+	box-sizing: border-box;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); 
+    padding: 60px 80px; 
+    margin-bottom: 35px;
 }
-=======
->>>>>>> 7c2fcd145a387e4b51a8d7928e09d584ab7dd1ea
+.form-row{
+	text-align: center;
+}
+
+table th,td{
+	text-align: center;
+}
+
