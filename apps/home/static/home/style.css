@@ -44,13 +44,9 @@ ADD, USER SECTION
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
-.form-register{
-	width: 570px;
-	box-sizing: border-box;
-    background-color: #ffffff;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); 
-    padding: 60px 80px; 
-    margin-bottom: 35px;
+span .input-group-addon{
+	width: 39px;
+	height: 34px;
 }
 .form-row{
 	text-align: center;
@@ -60,3 +56,6 @@ table th,td{
 	text-align: center;
 }
 
+#input login-username{
+	padding: 0px;
+}
