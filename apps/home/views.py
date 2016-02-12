@@ -26,6 +26,11 @@ def register(request):
 	if not username:
 		messages.add_message(request, messages.INFO, 'Username cannot be blank', extra_tags="registration")
 		errors += 1
+	users = User.objects.all()
+	for user in users:
+		if username == user.username:
+			messages.add_message(request, messages.INFO, 'Username already taken', extra_tags="registration")
+			errors += 1
 	if not password:
 		messages.add_message(request, messages.INFO, 'Password cannot be blank', extra_tags="registration")
 		errors += 1
@@ -33,14 +38,18 @@ def register(request):
 		messages.add_message(request, messages.INFO, 'Confirmation cannot be blank', extra_tags="registration")
 		errors += 1
 	if password != confirm:
-		messages.add_message(request, messages.INFO, 'Password must match confirm', extra_tags="registration")
+		messages.add_message(request, messages.INFO, 'Password does not match', extra_tags="registration")
 		errors += 1
 
 	if errors == 0:
 		User.objects.create(name=name, username=username, password=password, admin=admin)
 		messages.add_message(request, messages.INFO, 'Successfully Registered!', extra_tags="registration")
-
-	return redirect('login_page')
+		return redirect('dashboard')
+	else:
+		context = {
+			'errors': messages
+		}
+		return render(request, 'home/register.html', context)
 
 def login(request):
 
@@ -48,7 +57,8 @@ def login(request):
 	password = request.POST['password']
 
 	if not User.objects.all().filter(username=username):
-		messages.add_message(request, messages.INFO, 'Username is invalid', extra_tags="login")
+		messages.add_message(request, messages.INFO, 'Username is taken', extra_tags="login")
+		print messages
 		return redirect('login_page')
 	else:
 		if User.objects.all().filter(username=username)[0].password != password:
@@ -61,7 +71,7 @@ def login(request):
 def dashboard(request):
 
 	context = {
-		'username': User.objects.get(id=request.session['user_id']).username,
+		'name': User.objects.get(id=request.session['user_id']).name,
 		'users': User.objects.all(),
 		'user_id': User.objects.get(id=request.session['user_id']).id,
 		'santa': User.objects.get(id=request.session['user_id']).santa,
