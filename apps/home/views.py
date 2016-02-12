@@ -55,18 +55,28 @@ def login(request):
 
 	username = request.POST['username']
 	password = request.POST['password']
+	errors = 0
 
-	if not User.objects.all().filter(username=username):
-		messages.add_message(request, messages.INFO, 'Username is taken', extra_tags="login")
-		print messages
+	if not username:
+		messages.add_message(request, messages.INFO, 'Please enter a username', extra_tags="login")
+		errors += 1
+	elif not User.objects.all().filter(username=username):
+		messages.add_message(request, messages.INFO, 'Username is not valid', extra_tags="login")
+		errors += 1
 		return redirect('login_page')
 	else:
 		if User.objects.all().filter(username=username)[0].password != password:
 			messages.add_message(request, messages.INFO, 'Password is invalid', extra_tags="login")
-			return redirect('login_page')
-		else:
-			request.session['user_id'] = User.objects.all().filter(username=username)[0].id
-			return redirect('dashboard')
+			errors += 1
+
+	if errors == 0:
+		request.session['user_id'] = User.objects.all().filter(username=username)[0].id
+		return redirect('dashboard')
+	else:
+		context = {
+			'errors': messages
+		}
+		return render(request, 'home/login.html', context)
 
 def dashboard(request):
 
